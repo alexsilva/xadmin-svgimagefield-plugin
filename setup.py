@@ -8,5 +8,5 @@ setup(
     license='MIT',
     author='alex',
     author_email='alex@fabricadigital.com.br',
-    description='svgimagefield to django forms.'
+    description='xadmin plugin that adds support for svg images in ImageField of site forms.'
 )
