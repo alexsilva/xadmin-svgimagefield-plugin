@@ -1,10 +1,10 @@
+# coding=utf-8
 import sys
 import xml.etree.cElementTree as et
 from io import BytesIO
 
 from django.core.exceptions import ValidationError
 from django.forms import ImageField as DjangoImageField
-from django.utils import six
 
 
 class SVGAndImageFormField(DjangoImageField):
@@ -48,14 +48,14 @@ class SVGAndImageFormField(DjangoImageField):
             # Pillow doesn't detect the MIME type of all formats. In those
             # cases, content_type will be None.
             f.content_type = Image.MIME.get(image.format)
-        except Exception:
+        except Exception as exc:
             # add a workaround to handle svg images
             if not self.is_svg(temp_file):
                 # Pillow doesn't recognize it as an image.
-                six.reraise(ValidationError, ValidationError(
+                raise ValidationError(
                     self.error_messages['invalid_image'],
                     code='invalid_image',
-                ), sys.exc_info()[2])
+                ) from exc
         if hasattr(f, 'seek') and callable(f.seek):
             f.seek(0)
         return f
