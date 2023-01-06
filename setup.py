@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='xadmin-svgimagefield-plugin',
-    version='1.0',
+    version='2.0',
     packages=['xadmin_svgimagefield'],
     url='https://github.com/alexsilva/xadmin-svgimagefield-plugin',
     license='MIT',
